@@ -1,5 +1,16 @@
 package web.member.dao;
 
-public class UserDao {
+import java.util.List;
+import web.member.bean.User;
+
+public interface UserDao {
+	
+	int insert(User user);
+	
+	int updateByUsername(User user);
+	
+	User selectById(Integer id);
+	
+	List<User> selectAll();
 
 }

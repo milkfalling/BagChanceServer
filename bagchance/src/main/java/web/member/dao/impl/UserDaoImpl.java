@@ -1,5 +1,78 @@
 package web.member.dao.impl;
 
-public class UserDaoImpl {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import web.member.bean.User;
+import web.member.dao.UserDao;
+
+public class UserDaoImpl implements UserDao {
+	private DataSource dataSource;
+
+	public UserDaoImpl() {
+		try {
+			dataSource = (DataSource) new InitialContext().lookup("java:/comp/env/jdbc/bagchance");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int insert(User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateByUsername(User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public User selectById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> selectAll() {
+		String sql = "select * from User";
+		try (Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			List<User> list = new ArrayList<>();
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setMail(rs.getString("mail"));
+				user.setPhone(rs.getString("phone"));
+				user.setPassword(rs.getString("password"));
+				user.setNickname(rs.getString("nickname"));
+				user.setGender(rs.getBoolean("gender"));
+				user.setBirthday(rs.getTimestamp("birthday"));
+				user.setExplore_area(rs.getString("explore_area"));
+				user.setProfile_pic(rs.getString("profile_pic"));
+				user.setProfile_intro(rs.getString("profile_intro"));
+				user.setUser_status(rs.getString("user_status"));
+				user.setCreate_date(rs.getTimestamp("create_date"));
+				user.setLast_update_date(rs.getTimestamp("last_update_date"));
+				user.setToken_google(rs.getString("token_google"));
+				user.setToken_facebook(rs.getString("token_facebook"));
+				list.add(user);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
