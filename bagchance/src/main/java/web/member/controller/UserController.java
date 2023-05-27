@@ -26,7 +26,7 @@ public class UserController extends HttpServlet {
 	public void init() throws ServletException {
 		service = new UserServiceImpl();
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User user = GSON.fromJson(req.getReader(), User.class);
@@ -36,12 +36,12 @@ public class UserController extends HttpServlet {
 		respBody.addProperty("message", result ? "註冊成功" : "註冊失敗");
 		resp.getWriter().write(respBody.toString());
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+
 		String pathInfo = req.getPathInfo();
-		if(pathInfo == null || Objects.equals(pathInfo, "/")) {
+		if (pathInfo == null || Objects.equals(pathInfo, "/")) {
 			List<User> list = service.findAll();
 			resp.getWriter().write(GSON.toJson(list));
 		}
