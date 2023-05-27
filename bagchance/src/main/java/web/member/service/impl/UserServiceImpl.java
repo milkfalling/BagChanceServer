@@ -17,8 +17,27 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean register(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		String mail = user.getMail();
+		//FIXME 有效的EMAIL地址比起限制長度應該要用別的(像是調用selectByMail)，但先測試就不管
+		if (mail.length() < 10 || mail.length() > 255) {
+			return false;
+		}
+
+		String password = user.getPassword();
+		if (password.length() < 6 || password.length() > 12) {
+			return false;
+		}
+
+		String nickname = user.getNickname();
+		if (nickname.length() < 1 || nickname.length() > 20) {
+			return false;
+		}
+
+		if (dao.selectByMail(mail) != null) {
+			return false;
+		}
+
+		return dao.insert(user) >= 1;
 	}
 
 	@Override

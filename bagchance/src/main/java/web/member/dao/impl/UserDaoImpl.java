@@ -26,8 +26,17 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int insert(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "insert into User(MAIL, PASSWORD, NICKNAME) values(?,?,?)";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, user.getMail());
+			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getNickname());
+			return pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	@Override
@@ -37,8 +46,37 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User selectById(Integer id) {
-		// TODO Auto-generated method stub
+	public User selectByMail(String mail) {
+		String sql = "select * from USER where mail = ?";
+		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, mail);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					User user = new User();
+					user.setId(rs.getInt("id"));
+					user.setMail(rs.getString("mail"));
+					user.setPhone(rs.getString("phone"));
+					user.setPassword(rs.getString("password"));
+					user.setNickname(rs.getString("nickname"));
+					user.setGender(rs.getBoolean("gender"));
+					user.setBirthday(rs.getTimestamp("birthday"));
+					user.setExplore_area(rs.getString("explore_area"));
+					user.setProfile_pic(rs.getString("profile_pic"));
+					user.setProfile_intro(rs.getString("profile_intro"));
+					user.setUser_status(rs.getString("user_status"));
+					user.setCreate_date(rs.getTimestamp("create_date"));
+					user.setLast_update_date(rs.getTimestamp("last_update_date"));
+					user.setToken_google(rs.getString("token_google"));
+					user.setToken_facebook(rs.getString("token_facebook"));
+					return user;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 

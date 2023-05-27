@@ -9,7 +9,7 @@ public interface UserDao {
 	
 	int updateByUsername(User user);
 	
-	User selectById(Integer id);
+	User selectByMail(String mail);
 	
 	List<User> selectAll();
 
