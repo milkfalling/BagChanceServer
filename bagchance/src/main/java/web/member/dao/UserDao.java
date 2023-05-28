@@ -11,6 +11,10 @@ public interface UserDao {
 	
 	User selectByMail(String mail);
 	
+	User selectByMailAndPassword(User user);
+	
 	List<User> selectAll();
+	
+	int add(User user);
 
 }
