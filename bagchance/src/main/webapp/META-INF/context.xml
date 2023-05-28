@@ -3,7 +3,7 @@
 
 	<Resource name="jdbc/bagchance" type="javax.sql.DataSource"
 		driverClassName="com.mysql.cj.jdbc.Driver"
-		jdbcUrl="jdbc:mysql://localhost:3306/BAGCHANCE"
+		jdbcUrl="jdbc:mysql://localhost:3306/bagchance"
 		username="root"
 		password="password"
 		factory="com.zaxxer.hikari.HikariJNDIFactory"
