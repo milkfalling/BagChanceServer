@@ -79,7 +79,25 @@ public class UserController extends HttpServlet {
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		//使當前會話失效
+        req.getSession().invalidate();
+        HttpSession session = req.getSession(false);//false代表如果沒有新session也不會建立新的session
+        JsonObject respBody = new JsonObject();	
+        
+        if (session != null) {
+            try {
+                session.getAttribute("checkValidity");
+                // session有效
+            } catch (IllegalStateException e) {
+            	respBody.addProperty("message", "登出成功但session還在");
+        		resp.getWriter().write(respBody.toString());
+                // session無效
+            }
+        } else {
+        	respBody.addProperty("message", "登出成功且session不存在");
+        	resp.getWriter().write(respBody.toString());
+        	//session不存在
+        }
 	}
 	@Override
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

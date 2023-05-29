@@ -112,8 +112,12 @@ public class UserDaoImpl implements UserDao {
 	public int updateByUsername(User user) {
 		StringBuilder sql = new StringBuilder("update User").append(" set NICKNAME = ?");
 		String password = user.getPassword();
+		String profile_pic = user.getProfile_pic();
 		if (password != null && !password.isEmpty()) {
 			sql.append(", PASSWORD = ?");
+		}
+		if (profile_pic != null && !profile_pic.isEmpty()) {
+			sql.append(", PROFILE_PIC = ?");
 		}
 		sql.append(" where MAIL = ? ");
 		try (Connection conn = dataSource.getConnection();
@@ -122,6 +126,10 @@ public class UserDaoImpl implements UserDao {
 			int positionOfUsername = 2;
 			if (password != null && !password.isEmpty()) {
 				pstmt.setString(2, user.getPassword());
+				positionOfUsername++;
+			}
+			if (profile_pic != null && !profile_pic.isEmpty()) {
+				pstmt.setString(3, user.getProfile_pic());
 				positionOfUsername++;
 			}
 			pstmt.setString(positionOfUsername, user.getMail());
