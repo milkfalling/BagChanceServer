@@ -20,6 +20,7 @@ public class User implements Serializable {
 	private Timestamp last_update_date;
 	private String token_google;
 	private String token_facebook;
+	private Integer role_id;
 	
 	
 	public Integer getId() {
@@ -111,6 +112,12 @@ public class User implements Serializable {
 	}
 	public void setToken_facebook(String token_facebook) {
 		this.token_facebook = token_facebook;
+	}
+	public Integer getRole_id() {
+		return role_id;
+	}
+	public void setRole_id(Integer role_id) {
+		this.role_id = role_id;
 	}
 	
 	

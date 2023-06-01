@@ -103,6 +103,7 @@ public class UserController extends HttpServlet {
 	protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//拿到新產生的session ID(當前登入的資料)去做寫出(顯示在編輯頁)
 		User user  = (User) req.getSession().getAttribute("user");
+		System.out.println(user);
 		user.setPassword(null);//設定帶入的密碼資料為空
 		resp.getWriter().write(gson.toJson(user));
 	}

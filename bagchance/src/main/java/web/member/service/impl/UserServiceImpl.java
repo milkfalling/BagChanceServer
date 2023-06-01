@@ -52,6 +52,11 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 		
+		String profile_pic = user.getProfile_pic();
+		if(profile_pic == null ) {
+			return null;
+		}
+		
 		int resultCount = dao.updateByUsername(user);
 		if(resultCount>=1) {
 			return user;
