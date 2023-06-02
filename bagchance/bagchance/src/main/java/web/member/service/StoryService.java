@@ -5,6 +5,6 @@ import web.member.bean.Story;
 
 public interface StoryService {
 	
-	List<Story> findAll(Story story);
+	List<Story> findAll();
 	
 }
