@@ -56,6 +56,7 @@ public class UserController extends HttpServlet {
 			HttpSession session = req.getSession();//獲取當前的會話。如果沒有現有的會話，這將創建一個新的會話。
 			session.setAttribute("user", user); //用setAttribute存取所有資料
 		}
+		System.out.println(gson.toJson(user));
 		resp.getWriter().write(gson.toJson(user));
 	}
 	
