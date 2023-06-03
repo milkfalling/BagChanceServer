@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 					user.setGender(rs.getBoolean("gender"));
 					user.setBirthday(rs.getTimestamp("birthday"));
 					user.setExplore_area(rs.getString("explore_area"));
-					user.setProfile_pic(rs.getString("profile_pic"));
+					user.setProfile_pic(rs.getBytes("profile_pic"));
 					user.setProfile_intro(rs.getString("profile_intro"));
 					user.setUser_status(rs.getString("user_status"));
 					user.setCreate_date(rs.getTimestamp("create_date"));
@@ -92,7 +92,7 @@ public class UserDaoImpl implements UserDao {
 				user.setGender(rs.getBoolean("gender"));
 				user.setBirthday(rs.getTimestamp("birthday"));
 				user.setExplore_area(rs.getString("explore_area"));
-				user.setProfile_pic(rs.getString("profile_pic"));
+				user.setProfile_pic(rs.getBytes("profile_pic"));
 				user.setProfile_intro(rs.getString("profile_intro"));
 				user.setUser_status(rs.getString("user_status"));
 				user.setCreate_date(rs.getTimestamp("create_date"));
@@ -112,13 +112,13 @@ public class UserDaoImpl implements UserDao {
 	public int updateByUsername(User user) {
 		StringBuilder sql = new StringBuilder("update User").append(" set NICKNAME = ?");
 		String password = user.getPassword();
-		String profile_pic = user.getProfile_pic();
+//		String profile_pic = user.getProfile_pic();
 		if (password != null && !password.isEmpty()) {
 			sql.append(", PASSWORD = ?");
 		}
-		if (profile_pic != null && !profile_pic.isEmpty()) {
-			sql.append(", PROFILE_PIC = ?");
-		}
+//		if (profile_pic != null && !profile_pic.isEmpty()) {
+//			sql.append(", PROFILE_PIC = ?");
+//		}
 		sql.append(" where MAIL = ? ");
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -128,10 +128,10 @@ public class UserDaoImpl implements UserDao {
 				pstmt.setString(2, user.getPassword());
 				positionOfUsername++;
 			}
-			if (profile_pic != null && !profile_pic.isEmpty()) {
-				pstmt.setString(3, user.getProfile_pic());
-				positionOfUsername++;
-			}
+//			if (profile_pic != null && !profile_pic.isEmpty()) {
+//				pstmt.setString(3, user.getProfile_pic());
+//				positionOfUsername++;
+//			}
 			pstmt.setString(positionOfUsername, user.getMail());
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -157,7 +157,7 @@ public class UserDaoImpl implements UserDao {
 					user.setGender(rs.getBoolean("gender"));
 					user.setBirthday(rs.getTimestamp("birthday"));
 					user.setExplore_area(rs.getString("explore_area"));
-					user.setProfile_pic(rs.getString("profile_pic"));
+					user.setProfile_pic(rs.getBytes("profile_pic"));
 					user.setProfile_intro(rs.getString("profile_intro"));
 					user.setUser_status(rs.getString("user_status"));
 					user.setCreate_date(rs.getTimestamp("create_date"));

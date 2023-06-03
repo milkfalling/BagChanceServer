@@ -13,7 +13,8 @@ public class User implements Serializable {
 	private Boolean gender;
 	private Timestamp birthday;
 	private String explore_area;
-	private String profile_pic;
+	private String base64Avatar; //這個算是在JDBC內部運作的就不用特別建庫
+	private byte[] profile_pic; //要對接SQL的要記得打正確
 	private String profile_intro;
 	private String user_status;
 	private Timestamp create_date;
@@ -21,8 +22,6 @@ public class User implements Serializable {
 	private String token_google;
 	private String token_facebook;
 	private Integer role_id;
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -71,10 +70,16 @@ public class User implements Serializable {
 	public void setExplore_area(String explore_area) {
 		this.explore_area = explore_area;
 	}
-	public String getProfile_pic() {
+	public String getBase64Avatar() {
+		return base64Avatar;
+	}
+	public void setBase64Avatar(String base64Avatar) {
+		this.base64Avatar = base64Avatar;
+	}
+	public byte[] getProfile_pic() {
 		return profile_pic;
 	}
-	public void setProfile_pic(String profile_pic) {
+	public void setProfile_pic(byte[] profile_pic) {
 		this.profile_pic = profile_pic;
 	}
 	public String getProfile_intro() {

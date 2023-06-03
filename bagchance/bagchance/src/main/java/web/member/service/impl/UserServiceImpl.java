@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 		
-		String profile_pic = user.getProfile_pic();
+		byte[] profile_pic = user.getProfile_pic();
 		if(profile_pic == null ) {
 			return null;
 		}

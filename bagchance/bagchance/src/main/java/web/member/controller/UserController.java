@@ -1,6 +1,7 @@
 package web.member.controller;
 
 import java.io.IOException;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,12 +44,16 @@ public class UserController extends HttpServlet {
 		String pathInfo = req.getPathInfo();
 		pathInfo = pathInfo.substring(1);
 		String[] pathVariables = pathInfo.split("/");
-		
 		User user = new User();
 		user.setMail(pathVariables[0]);
 		user.setPassword(pathVariables[1]);
 		user = SERVICE.login(user);
-
+		if (user != null){
+			String userAvatarBase64 = Base64.getEncoder().encodeToString(user.getProfile_pic());
+			user.setBase64Avatar(userAvatarBase64); //這個記得前端要對接
+			user.setProfile_pic(null); //節省空間
+		};
+		
 		if (user != null) {
 			if (req.getSession(false) != null) {
 				req.changeSessionId(); // ←產生新的Session ID
