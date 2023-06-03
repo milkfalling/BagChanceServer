@@ -3,6 +3,7 @@ package web.member.controller;
 import javax.servlet.http.HttpServlet;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ public class MePageController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//取得網址後面的字串
+		// 取得網址後面的字串
 		String pathInfo = req.getPathInfo();
 		pathInfo = pathInfo.substring(1);
 		String[] pathVariables = pathInfo.split("/");
@@ -34,12 +35,17 @@ public class MePageController extends HttpServlet {
 //		System.out.println(pathVariables[0]);  ##1
 		storyPic.setId(pathVariables[0]);
 		List<StoryPic> storyPicList = SERVICE.findAll(storyPic);
+		storyPicList.forEach(storypic -> {
+			String storypicBase64 = Base64.getEncoder().encodeToString(storypic.getPic());
+			storypic.setPicBase64(storypicBase64);
+			storypic.setPic(null);
+		});
 		if (req.getSession(false) != null) {
 			req.changeSessionId(); // ←產生新的Session ID
 		} // ↓此屬性物件即用來區分是否登入中
 		HttpSession session = req.getSession();// 獲取當前的會話。如果沒有現有的會話，這將創建一個新的會話。
 		session.setAttribute("storyList", storyPicList); // 用setAttribute存取所有資料
-		System.out.println(gson.toJson(storyPicList));
+//		System.out.println(gson.toJson(storyPicList));
 		resp.getWriter().write(gson.toJson(storyPicList));
 	}
 }

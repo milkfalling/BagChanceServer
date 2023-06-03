@@ -5,8 +5,9 @@ import java.sql.Timestamp;
 public class StoryPic {
 	private String id;
 	private String storyId;
-	private byte pic;
+	private byte[] pic;
 	private Timestamp createDate;
+	private String picBase64;
 
 	public String getId() {
 		return id;
@@ -24,13 +25,6 @@ public class StoryPic {
 		this.storyId = storyId;
 	}
 
-	public byte getPic() {
-		return pic;
-	}
-
-	public void setPic(byte pic) {
-		this.pic = pic;
-	}
 
 	public Timestamp getCreateDate() {
 		return createDate;
@@ -39,5 +33,22 @@ public class StoryPic {
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
+
+	public byte[] getPic() {
+		return pic;
+	}
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
+
+	public String getPicBase64() {
+		return picBase64;
+	}
+
+	public void setPicBase64(String picBase64) {
+		this.picBase64 = picBase64;
+	}
+
 
 }

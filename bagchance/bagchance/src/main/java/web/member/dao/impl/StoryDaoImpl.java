@@ -48,7 +48,7 @@ public class StoryDaoImpl implements StoryDao {
 				StoryPic sp = new StoryPic();
 				sp.setId(rs.getString("id"));
 				sp.setStoryId(rs.getString("story_Id"));
-				sp.setPic(rs.getByte("pic"));
+				sp.setPic(rs.getBytes("pic"));
 				sp.setCreateDate(rs.getTimestamp("create_Date"));
 
 				list.add(sp);
