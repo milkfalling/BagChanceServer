@@ -1,12 +1,12 @@
 package web.member.dao;
 
 import java.util.List;
-import web.member.bean.Story;
+
+import web.member.bean.StoryPic;
 
 public interface StoryDao {
+	
 		
-		Story selectStroyById(Integer id);
-		
-		List<Story> selectAll();
+		List<StoryPic> selectAllStoryPicsByUserId(StoryPic storyPic);
 		
 	}

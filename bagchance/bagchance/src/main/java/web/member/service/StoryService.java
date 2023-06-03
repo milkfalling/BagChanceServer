@@ -1,10 +1,10 @@
 package web.member.service;
 
 import java.util.List;
-import web.member.bean.Story;
+import web.member.bean.StoryPic;
 
 public interface StoryService {
 	
-	List<Story> findAll();
+	List<StoryPic> findAll(StoryPic storyPic);
 	
 }
