@@ -40,6 +40,7 @@ public class UserController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setCharacterEncoding("UTF-8");
 		//取得網址後面的字串
 		String pathInfo = req.getPathInfo();
 		pathInfo = pathInfo.substring(1);
