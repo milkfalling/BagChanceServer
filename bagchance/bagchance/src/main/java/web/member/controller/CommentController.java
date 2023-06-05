@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,14 +38,8 @@ public class CommentController extends HttpServlet {
 	        pdupp.setPpBase64(pduppBase64);
 	        pdupp.setProfile_pic(null);
 	    });
-	    
-	    
-	    
 	    resp.setContentType("application/json");
 	    resp.setCharacterEncoding("UTF-8");
-	    
-	    
-	    
 	    try (PrintWriter writer = resp.getWriter()) {
 	        gson.toJson(pdl, writer);
 	    }
