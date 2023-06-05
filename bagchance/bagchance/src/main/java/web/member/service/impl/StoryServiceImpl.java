@@ -17,7 +17,6 @@ public class StoryServiceImpl implements StoryService {
 
 	@Override
 	public List<StoryPic> findAll(StoryPic storyPic) {
-//		System.out.println("==================selectAll開始執行===========================================");
 		return dao.selectAllStoryPicsByUserId(storyPic);
 	}
 

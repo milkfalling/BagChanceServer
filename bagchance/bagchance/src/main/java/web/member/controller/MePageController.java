@@ -19,7 +19,7 @@ import web.member.bean.StoryPic;
 import web.member.service.StoryService;
 import web.member.service.impl.StoryServiceImpl;
 
-@WebServlet("/story/*")
+@WebServlet("/me/*")
 public class MePageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
@@ -32,7 +32,6 @@ public class MePageController extends HttpServlet {
 		pathInfo = pathInfo.substring(1);
 		String[] pathVariables = pathInfo.split("/");
 		StoryPic storyPic = new StoryPic();
-//		System.out.println(pathVariables[0]);  ##1
 		storyPic.setId(pathVariables[0]);
 		List<StoryPic> storyPicList = SERVICE.findAll(storyPic);
 		storyPicList.forEach(storypic -> {
