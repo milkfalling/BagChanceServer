@@ -2,6 +2,7 @@ package web.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -13,32 +14,32 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import web.member.bean.Comment;
-import web.member.bean.MePageAddFriend;
+import web.member.bean.PostDetail;
 import web.member.service.CommentService;
+import web.member.service.PostDetailService;
 import web.member.service.impl.CommentServiceImpl;
+import web.member.service.impl.PostDetailServiceImpl;
 
-@WebServlet("/postdetail/*")
-public class CommentController extends HttpServlet {
+@WebServlet("/mepagemidpostpic/*")
+public class MePageMidPostPicController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
-	private static final CommentService SERVICE = new CommentServiceImpl();
+	private static final PostDetailService SERVICE = new PostDetailServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	    String pathInfo = req.getPathInfo();
 	    pathInfo = pathInfo.substring(1);
 	    String[] pathVariables = pathInfo.split("/");
-	    Comment pd = new Comment();
+	    PostDetail pd = new PostDetail();
 	    pd.setSid(pathVariables[0]);
-	    List<Comment> pdl = SERVICE.selectStoryDetailByStoryId(pd);
-	    pdl.forEach(pdupp -> {
-	        String pduppBase64 = Base64.getEncoder().encodeToString(pdupp.getProfile_pic());
-	        pdupp.setPpBase64(pduppBase64);
-	        pdupp.setProfile_pic(null);
+	    List<PostDetail> pdl = SERVICE.selectStoryDetailByStoryId(pd);
+	    pdl.forEach(pdp -> {
+	        String pdpBase64 = Base64.getEncoder().encodeToString(pdp.getPic());
+	        pdp.setBase64Pic(pdpBase64);
+	        pdp.setPic(null);
 	    });
 	    resp.setContentType("application/json");
 	    resp.setCharacterEncoding("UTF-8");

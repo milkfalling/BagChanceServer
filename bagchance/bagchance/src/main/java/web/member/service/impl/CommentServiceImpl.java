@@ -20,4 +20,9 @@ private CommentDao dao;
 		return dao.selectStoryDetailByStoryId(postdetail);
 	}
 
+	@Override
+	public List<Comment> selectCommentByUserId(Comment comment) {
+		return dao.selectCommentByUserId(comment);
+	}
+
 }
