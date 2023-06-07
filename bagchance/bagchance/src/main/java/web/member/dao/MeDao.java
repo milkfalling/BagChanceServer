@@ -8,4 +8,7 @@ public interface MeDao {
 	
 		
 		List<MePageAllPost> mePageAllPost (MePageAllPost mepageallpost); 
+		
+		String deletePost(MePageAllPost MePageAllPost );
+		
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 import web.member.bean.MePageAllPost;
 import web.member.service.MeService;
@@ -47,5 +48,21 @@ public class MePageController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 //		System.out.println(gson.toJson(storyPicList));
 		resp.getWriter().write(gson.toJson(mePageAllPostList));
+	}
+	
+
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			String pathInfo = req.getPathInfo();
+			pathInfo = pathInfo.substring(1);
+			String[] pathVariables = pathInfo.split("/");
+			MePageAllPost MePageAllPost = new MePageAllPost();
+			MePageAllPost.setStoryId(pathVariables[0]);
+			String deleteSuccess = SERVICE.deletePost(MePageAllPost);
+			JsonObject respBody = new JsonObject();                   
+			resp.setCharacterEncoding("UTF-8");
+			String message = "刪除" + (deleteSuccess !=null ? "成功，請刷新頁面" : "失敗，請洽客服處");
+			respBody.addProperty("message", message);
+			resp.getWriter().write(respBody.toString());          
 	}
 }

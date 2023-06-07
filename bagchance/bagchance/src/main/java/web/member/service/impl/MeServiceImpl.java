@@ -20,4 +20,10 @@ public class MeServiceImpl implements MeService {
 		return dao.mePageAllPost(mepageallpost);
 	}
 
+	@Override
+	public String deletePost(MePageAllPost mePageAllPost) {
+		
+		return dao.deletePost(mePageAllPost);
+	}
+
 }
