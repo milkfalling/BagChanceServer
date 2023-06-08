@@ -164,7 +164,6 @@ public class UserDaoImpl implements UserDao {
 					user.setLast_update_date(rs.getTimestamp("last_update_date"));
 					user.setToken_google(rs.getString("token_google"));
 					user.setToken_facebook(rs.getString("token_facebook"));
-					user.setRole_id(rs.getInt("role_id"));
 					return user;
 				}
 			} catch (Exception e) {
