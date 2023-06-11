@@ -27,7 +27,7 @@ public class MePageAddFriendDaoImpl implements MePageAddFriendDao {
 
 	@Override
 	public MePageAddFriend MePageAddFriend(MePageAddFriend mepageaddfriend) {
-		String sql = "SELECT status FROM chat WHERE (INVITE_UID, BE_INVITED_UID) IN ((?, ?), (?, ?)) having status =1 or status=0 ";
+		String sql = "SELECT status FROM chat WHERE (INVITE_UID, BE_INVITED_UID) IN ((?, ?), (?, ?)) having status =1 ";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, mepageaddfriend.getInviter());
 			pstmt.setString(2, mepageaddfriend.getBeinvited());
@@ -51,7 +51,7 @@ public class MePageAddFriendDaoImpl implements MePageAddFriendDao {
 
 	@Override
 	public int addFriend(MePageAddFriend mepageaddfriend) {
-		String sql = "insert into chat values(default,?,?,0,default,default)";
+		String sql = "UPDATE chat SET status = 1 WHERE invite_uid = ? and be_invited_uid = ?;";
 		try (Connection conn = dataSource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			pstmt.setString(1, mepageaddfriend.getInviter());
 			pstmt.setString(2, mepageaddfriend.getBeinvited());

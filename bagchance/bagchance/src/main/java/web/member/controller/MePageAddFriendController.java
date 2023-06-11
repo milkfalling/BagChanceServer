@@ -46,7 +46,7 @@ public class MePageAddFriendController extends HttpServlet {
 		JsonObject reqBody = new JsonObject();
 		reqBody.addProperty("successful", result);
 		resp.setCharacterEncoding("UTF-8");
-		String message = (result ? "成功送出邀請" : "請再試一次");
+		String message = (result ? "成功添加好友!去聊天吧!" : "請洽客服處");
 		JsonObject respBody = new JsonObject();		
 		respBody.addProperty("message", message);
 		resp.getWriter().write(respBody.toString());
